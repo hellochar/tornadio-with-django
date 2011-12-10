@@ -11,7 +11,7 @@ import django.core.handlers.wsgi
 from chat.chatroom import ChatRouter
 
 ROOT = op.normpath(op.dirname(__file__))
-def main():
+def main(port):
     # Starting Django
     sys.path.append('/home/felix/Projects/trnserver/frontend')
     os.environ['DJANGO_SETTINGS_MODULE'] = 'frontend.settings'
@@ -26,7 +26,7 @@ def main():
         ],
         flash_policy_port = 843,
         flash_policy_file = op.join(ROOT, 'flashpolicy.xml'),
-        socket_io_port = 8001
+        socket_io_port=port
     )
 
     io_loop = tornado.ioloop.IOLoop.instance()
@@ -35,4 +35,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    from optparse import OptionParser
+
+    parser = OptionParser()
+    parser.add_option('-p', '--port', dest='port', help='Specify the socket IO port')
+    (options, args) = parser.parse_args()
+
+    main(options.port)
