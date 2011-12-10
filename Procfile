@@ -1,1 +1,1 @@
-web: python server.py
+web: python frontend/manage.py collectstatic --noinput && python server.py --port $PORT
