@@ -17,5 +17,5 @@ urlpatterns = patterns('',
 )
 
 # For debug purposes: host static files through our Django instance
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-urlpatterns += staticfiles_urlpatterns()
+#from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+#urlpatterns += staticfiles_urlpatterns()

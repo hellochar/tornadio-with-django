@@ -19,6 +19,8 @@ def main():
     wsgi_app = tornado.wsgi.WSGIContainer(django.core.handlers.wsgi.WSGIHandler())
     tornado_app = tornado.web.Application(
         [
+            (r'/', tornado.web.FallbackHandler, dict(fallback=wsgi_app)),
+            (r'/static', tornado.web.StaticFileHandler, dict(path='/home/felix/Projects/trnserver/frontend/static')),
             ChatRouter.route(),
             (r'.*', tornado.web.FallbackHandler, dict(fallback=wsgi_app)),
         ],
